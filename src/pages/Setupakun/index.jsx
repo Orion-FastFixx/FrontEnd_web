@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Button, Img, Input, Text } from "components";
-
+import { Navigate, useNavigate } from "react-router-dom";
 const SetupakunPage = () => {
+  const [selectedJenis, setSelectedJenis] = useState(null);
+const navigate = useNavigate()
+  const handleJenisButtonClick = (jenis) => {
+    setSelectedJenis(jenis === selectedJenis ? null : jenis);
+  };
+
   return (
     <>
       <div className="bg-gray-50 font-monasans h-[1024px] mx-auto pt-[132px] relative w-full">
@@ -40,20 +46,27 @@ const SetupakunPage = () => {
                   </Text>
                   <div className="flex sm:flex-col flex-row gap-[29px] items-start justify-start w-auto sm:w-full">
                     <Button
-                      className="cursor-pointer leading-[normal] min-w-[175px] shadow-bs text-base text-center"
+                      className={`cursor-pointer leading-[normal] min-w-[175px] shadow-bs text-base text-center ${
+                        selectedJenis === "mitra" ? "bg-red-600" : "bg-gray-50"
+                      }`}
                       shape="round"
-                      color="red_600"
+                      color={selectedJenis === "mitra" ? "red_600" : "gray_50"}
                       size="lg"
                       variant="fill"
+                      onClick={() => handleJenisButtonClick("mitra")}
+                      
                     >
                       Mitra Bengkel
                     </Button>
                     <Button
-                      className="!text-gray-900 cursor-pointer leading-[normal] min-w-[196px] shadow-bs text-base text-center"
+                      className={`!text-gray-900 cursor-pointer leading-[normal] min-w-[196px] shadow-bs text-base text-center ${
+                        selectedJenis === "montir" ? "bg-red-600" : "bg-gray-50"
+                      }`}
                       shape="round"
-                      color="gray_50"
+                      color={selectedJenis === "montir" ? "red_600" : "gray_50"}
                       size="lg"
                       variant="fill"
+                      onClick={() => handleJenisButtonClick("montir")}
                     >
                       Montir Individual
                     </Button>
@@ -99,6 +112,7 @@ const SetupakunPage = () => {
                 color="red_600"
                 size="md"
                 variant="fill"
+                onClick={() => navigate("/masuk")}
               >
                 Selanjutnya
               </Button>

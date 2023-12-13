@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "pages/Home";
+
 import NotFound from "pages/NotFound";
 const AdminEdukasi = React.lazy(() => import("pages/AdminEdukasi"));
 const AdminMontir = React.lazy(() => import("pages/AdminMontir"));
@@ -19,10 +19,10 @@ const Kontak = React.lazy(() => import("pages/Kontak"));
 const Beranda = React.lazy(() => import("pages/Beranda"));
 const ProjectRoutes = () => {
   return (
-    <React.Suspense fallback={<>Loading...</>}>
+    <React.Suspense fallback={<>Sabar Yaa kaka......</>}>
       <Router>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Beranda />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/beranda" element={<Beranda />} />
           <Route path="/kontak" element={<Kontak />} />

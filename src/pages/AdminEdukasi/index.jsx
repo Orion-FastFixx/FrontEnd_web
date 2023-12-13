@@ -5,6 +5,7 @@ import { Img,  Line, Text } from "components";
 import NavbarDashboard from "components/NavbarDashboard";
 import Modal from 'react-modal';
 
+
 const AdminEdukasi = () => {
   const [eduData, setEduData] = useState([
     { id: 1, title: 'Manfaat Ganti  Oli Berkala', description: 'Kapan Waktu Yang tepat ...' },
@@ -124,7 +125,7 @@ const AdminEdukasi = () => {
       <div className="flex justify-end mb-4 mr-4 mt-4">
   <button
     onClick={handleAdd}
-    className="bg-gray-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+    className="bg-gray-500 hover:bg-gray-700 text-gray-100 font-bold py-2 px-4 rounded"
   >
     Tambah
   </button>
@@ -133,7 +134,7 @@ const AdminEdukasi = () => {
 
 
       <table className="min-w-full divide-y divide-gray-200">
-  <thead className="bg-gray-200 text-white">
+  <thead className="bg-gray-500 text-gray-100">
     <tr>
       <th className="py-3 px-6 text-left">Judul</th>
       <th className="py-3 px-6 text-left">Deskripsi</th>
@@ -142,19 +143,19 @@ const AdminEdukasi = () => {
   </thead>
   <tbody>
     {eduData.map((edu) => (
-      <tr key={edu.id} className="bg-white hover:bg-gray-50">
+      <tr key={edu.id} className="bg-gray-100 hover:bg-gray-50">
         <td className="py-4 px-6">{edu.title}</td>
         <td className="py-4 px-6">{edu.description}</td>
         <td className="py-4 px-6">
           <button
             onClick={() => handleEdit(edu.id)}
-            className="bg-blue-300 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+            className="bg-blue-500 hover:bg-blue-700 text-gray-100 font-bold py-2 px-4 rounded mr-2"
           >
             Edit
           </button>
           <button
             onClick={() => handleDelete(edu.id)}
-            className="bg-red-300 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-red-500 hover:bg-red-700 text-gray-100 font-bold py-2 px-4 rounded"
           >
             Hapus
           </button>
@@ -178,7 +179,7 @@ const AdminEdukasi = () => {
             alignItems: 'center',
           },
           content: {
-            backgroundColor: 'white',
+            backgroundColor: 'gray-100',
             borderRadius: '8px',
             boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.2)',
             overflow: 'hidden',
@@ -187,8 +188,8 @@ const AdminEdukasi = () => {
           },
         }}
       >
-        <div className="p-6 w-full max-w-md">
-          <h2 className="text-3xl font-bold mb-4 text-gray-800">Tambah Edukasi</h2>
+        <div className="p-6 w-full max-w-md bg-gray-100">
+          <h2 className="text-3xl font-bold mb-4 text-red-600">Tambah Edukasi</h2>
           <form>
             <div className="mb-4">
               <label htmlFor="title" className="block text-sm font-medium text-gray-600">
@@ -219,20 +220,22 @@ const AdminEdukasi = () => {
             <button
               type="button"
               onClick={handleSave}
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-6 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:shadow-outline-blue active:scale-100"
+              className="bg-blue-500 hover:bg-blue-700 text-gray-100 font-bold py-2 px-4 rounded-full mt-6 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:shadow-outline-blue active:scale-100"
             >
               Simpan
             </button>
             <button
               type="button"
               onClick={handleCloseModal}
-              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full mt-6 ml-4 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:shadow-outline-red active:scale-100"
+              className="bg-red-500 hover:bg-red-700 text-gray-100 font-bold py-2 px-4 rounded-full mt-6 ml-4 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:shadow-outline-red active:scale-100"
             >
               Batal
             </button>
           </form>
         </div>
       </Modal>
+
+   
     </div>
       
     </div>

@@ -1,129 +1,53 @@
-import React from "react";
-import { Link } from "react-router-dom"; 
+import React, { useState, useEffect } from "react";
+
+import { Link } from "react-router-dom";
 import { Img,  Line, Text } from "components";
-import Modal from "react-modal";
-import {
-  Card,
-  CardHeader,
-  Input,
-  Typography,
-  Button,
-  CardBody,
-  Chip,
-  Avatar,
-  IconButton,
-  Tooltip,
-} from "@material-tailwind/react";
-import { PencilIcon, UserPlusIcon } from "@heroicons/react/24/solid";
-
-const TABLE_HEAD = ["Pesanan", "Montir", "Status", "Masalah", "Detail"];
-
-const customModalStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    width: "50%",
-    padding: "20px",
-    boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
-    border: "none",
-    borderRadius: "8px",
-  },
-};
-
-const TABLE_ROWS = [
-  {
-    pesanan: "Mobil Mogok",
-    montir: "Agus",
-    status: true,
-    masalah: "Mesin Mati",
-    date: "23/04/18",
-  },
-  {
-    pesanan: "Aki Soak",
-    montir: "Agus",
-    status: false,
-    masalah: "Aki Rusak",
-    date: "23/04/18",
-  },
-  {
-    pesanan: "Ban Bocor",
-    montir: "Agus",
-    status: false,
-    masalah: "Ban Bocor",
-    date: "19/09/17",
-  },
-  {
-    pesanan: "Mesin ilang",
-    montir: "Agus0",
-    status: true,
-    masalah: "Mesin Hilang",
-    date: "24/12/08",
-  },
-  {
-    pesanan: "Derek",
-    montir: "Agus",
-    status: false,
-    masalah: "Mobil Tidak Bisa Jalan",
-    date: "04/10/21",
-  },
-];
-
-
+import NavbarDashboard from "components/NavbarDashboard";
+import Modal from 'react-modal';
 const BengkelPesanan = () => {
-  const [isAddPesananFormVisible, setAddPesananFormVisible] = useState(false);
-  const [isEditPesananFormVisible, setEditPesananFormVisible] = useState(false);
-  const [pesananFormData, setPesananFormData] = useState({
-    pesanan: "",
-    montir: "",
-    status: false,
-    masalah: "",
-    date: "",
-  });
-  const [tableRows, setTableRows] = useState(TABLE_ROWS);
-  const [selectedPesananIndex, setSelectedPesananIndex] = useState(null);
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [selectedData, setSelectedData] = useState(null);
 
-  const handleAddPesananClick = () => {
-    setAddPesananFormVisible(true);
-    setPesananFormData({
-      pesanan: "",
-      montir: "",
-      status: false,
-      masalah: "",
-      date: "",
-    });
-  };
+  function openModal(data) {
+    setSelectedData(data);
+    setIsOpen(true);
+  }
 
-  const handleAddPesanan = () => {
-    const newPesanan = { ...pesananFormData };
-    setTableRows((prevRows) => [...prevRows, newPesanan]);
-    setAddPesananFormVisible(false);
-  };
-
-  const handleEditPesananClick = (index) => {
-    setSelectedPesananIndex(index);
-    setPesananFormData({ ...tableRows[index] });
-    setEditPesananFormVisible(true);
-  };
-
-  const handleEditPesanan = () => {
-    const updatedPesanan = { ...pesananFormData };
-    const updatedTableRows = [...tableRows];
-    updatedTableRows[selectedPesananIndex] = updatedPesanan;
-    setTableRows(updatedTableRows);
-    setEditPesananFormVisible(false);
-  };
-
-  const handleDeletePesanan = () => {
-    const updatedTableRows = tableRows.filter((_, index) => index !== selectedPesananIndex);
-    setTableRows(updatedTableRows);
-    setEditPesananFormVisible(false);
-  };
+  function closeModal() {
+    setSelectedData(null);
+    setIsOpen(false);
+  }
+ const tableData = [
+  {
+    name: "Mantri Sunarti",
+    status: "Aktif",
+    montir: "Ujang",
+    masalah:"ban kempes"
+  },
+  {
+    name: "tati sukati",
+    status: "Aktif",
+    montir: "asep",
+    masalah:"olibocor"
+  },
+  {
+    name: "Raynaldi",
+    status: "Aktif",
+    montir: "Ujang",
+    masalah:"velg patah"
+  },
+  {
+    name: "Mantri Sunarti",
+    status: "Aktif",
+    montir: "Ujang",
+    masalah:"ban kempes"
+  },
+ 
+];
+ 
   return (
     <>
+      <div className="flex">
       <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-white h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
         <div className="mb-2 p-4">
           <Img
@@ -179,7 +103,7 @@ const BengkelPesanan = () => {
               <div className="h-11 mr-6 w-11 bg-gray-50 shadow-bs rounded-[10px]">
                 <Img
                   className="h-11 rounded-[10px] my-auto"
-                  src="images/img_frame_gray_50_44x44.svg"
+                  src="images/img_frame.svg"
                   alt="Frame"
                 />
               </div>
@@ -195,7 +119,7 @@ const BengkelPesanan = () => {
               className="flex items-center w-full p-3 rounded-lg text-start leading-tight transition-all hover:bg-red-500 hover:bg-opacity-80 focus:bg-red-500 focus:bg-opacity-80 active:bg-red-500 active:bg-opacity-80 hover:text-white focus:text-white active:text-white outline-none"
             >
               {/* Ganti ikon dengan ikon yang sesuai */}
-              <div className="h-11 mr-6 w-11 bg-gray-50 shadow-bs p-[13px] rounded-[10px]">
+              <div className="h-11 mr-6 w-11 bg-red-50 shadow-bs p-[13px] rounded-[10px]">
                 <Img
                   className="h-[18px] my-auto"
                   src="images/img_clock_red_600.svg"
@@ -207,231 +131,125 @@ const BengkelPesanan = () => {
           </Link>
         </nav>
       </div>
+    
+      <div className="w-full">
+      {/* Navbar */}
+      <NavbarDashboard />
 
+      {/* Content */}
+      <div className="bg-white rounded shadow p-4 mt-4">
+        <h1 className="text-2xl font-bold mb-4">Montir List</h1>
+        <table className="min-w-full divide-y divide-gray-200">
+        <thead className="bg-gray-50">
+          <tr>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">montir</th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">masalah</th>
+            
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Detail</th>
+          </tr>
+        </thead>
+        <tbody className="bg-white divide-y divide-gray-200">
+          {tableData.map((data, index) => (
+            <tr key={index}>
+              <td className="px-6 py-4 whitespace-nowrap">{data.name}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{data.status}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{data.montir}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{data.masalah}</td>
+              
+              <td className="px-6 py-4 whitespace-nowrap">
+              <button
+  onClick={() => openModal(data)}
+  className="bg-white-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded border border-blue-500"
+>
+  Detail
+</button>
 
-      <Card className="h-full w-full">
-      <CardHeader floated={false} shadow={false} className="rounded-none">
-        <div className="mb-8 flex items-center justify-between gap-8">
-          <div>
-            <Typography variant="h5" color="blue-gray">
-              Daftar Pesanan
-            </Typography>
-          </div>
-          <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
-            <Button className="flex items-center gap-3" size="sm" onClick={handleAddPesananClick}>
-              <UserPlusIcon strokeWidth={2} className="h-4 w-4" /> Tambah Pesanan
-            </Button>
-          </div>
-        </div>
-      </CardHeader>
-      <CardBody className="overflow-scroll px-0">
-        <Modal
-          isOpen={isAddPesananFormVisible}
-          onRequestClose={() => setAddPesananFormVisible(false)}
-          contentLabel="Modal Tambah Pesanan"
-          style={customModalStyles}
-        >
-          <Typography variant="h6" color="blue-gray" className="mb-4">
-            Tambah Pesanan
-          </Typography>
-          <div className="mb-4">
-            <label htmlFor="pesanan">Pesanan</label>
-            <Input
-              id="pesanan"
-              placeholder="Pesanan"
-              value={pesananFormData.pesanan}
-              onChange={(e) => setPesananFormData({ ...pesananFormData, pesanan: e.target.value })}
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="montir">Montir</label>
-            <Input
-              id="montir"
-              placeholder="Montir"
-              value={pesananFormData.montir}
-              onChange={(e) => setPesananFormData({ ...pesananFormData, montir: e.target.value })}
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="status">Status</label>
-            <select
-              id="status"
-              value={pesananFormData.status}
-              onChange={(e) => setPesananFormData({ ...pesananFormData, status: e.target.value })}
-            >
-              <option value={true}>Proses</option>
-              <option value={false}>Selesai</option>
-            </select>
-          </div>
-          <div className="mb-4">
-            <label htmlFor="masalah">Masalah</label>
-            <Input
-              id="masalah"
-              placeholder="Masalah"
-              value={pesananFormData.masalah}
-              onChange={(e) => setPesananFormData({ ...pesananFormData, masalah: e.target.value })}
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="date">Tanggal</label>
-            <Input
-              id="date"
-              placeholder="Tanggal"
-              value={pesananFormData.date}
-              onChange={(e) => setPesananFormData({ ...pesananFormData, date: e.target.value })}
-            />
-          </div>
-          <Button onClick={handleAddPesanan}>Tambah Pesanan</Button>
-        </Modal>
-        <Modal
-          isOpen={isEditPesananFormVisible}
-          onRequestClose={() => setEditPesananFormVisible(false)}
-          contentLabel="Modal Edit Pesanan"
-          style={customModalStyles}
-        >
-          <Typography variant="h6" color="blue-gray" className="mb-4">
-            Edit Pesanan
-          </Typography>
-          <div className="mb-4">
-            <label htmlFor="edit-pesanan">Pesanan</label>
-            <Input
-              id="edit-pesanan"
-              placeholder="Pesanan"
-              value={pesananFormData.pesanan}
-              onChange={(e) => setPesananFormData({ ...pesananFormData, pesanan: e.target.value })}
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="edit-montir">Montir</label>
-            <Input
-              id="edit-montir"
-              placeholder="Montir"
-              value={pesananFormData.montir}
-              onChange={(e) => setPesananFormData({ ...pesananFormData, montir: e.target.value })}
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="edit-status">Status</label>
-            <select
-              id="edit-status"
-              value={pesananFormData.status}
-              onChange={(e) => setPesananFormData({ ...pesananFormData, status: e.target.value })}
-            >
-              <option value={true}>Proses</option>
-              <option value={false}>Selesai</option>
-            </select>
-          </div>
-          <div className="mb-4">
-            <label htmlFor="edit-masalah">Masalah</label>
-            <Input
-              id="edit-masalah"
-              placeholder="Masalah"
-              value={pesananFormData.masalah}
-              onChange={(e) => setPesananFormData({ ...pesananFormData, masalah: e.target.value })}
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="edit-date">Tanggal</label>
-            <Input
-              id="edit-date"
-              placeholder="Tanggal"
-              value={pesananFormData.date}
-              onChange={(e) => setPesananFormData({ ...pesananFormData, date: e.target.value })}
-            />
-          </div>
-          <Button onClick={handleEditPesanan}>Simpan Perubahan</Button>
-          <Button color="red" onClick={handleDeletePesanan} className="ml-2">
-            Hapus Pesanan
-          </Button>
-        </Modal>
-        <table className="mt-4 w-full min-w-max table-auto text-left">
-          <thead>
-            <tr>
-              {TABLE_HEAD.map((head) => (
-                <th
-                  key={head}
-                  className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4"
-                >
-                  <Typography
-                    variant="small"
-                    color="blue-gray"
-                    className="font-normal leading-none opacity-70"
-                  >
-                    {head}
-                  </Typography>
-                </th>
-              ))}
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {tableRows.map(({ pesanan, montir, status, masalah, date }, index) => {
-              const isLast = index === tableRows.length - 1;
-              const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
+          ))}
+        </tbody>
+      </table>
 
-              return (
-                <tr key={pesanan}>
-                  <td className={classes}>
-                    <div className="flex items-center gap-3">
-                      <Typography variant="small" color="blue-gray" className="font-normal">
-                        {pesanan}
-                      </Typography>
-                    </div>
-                  </td>
-                  <td className={classes}>
-                    <div className="flex flex-col">
-                      <Typography variant="small" color="blue-gray" className="font-normal">
-                        {montir}
-                      </Typography>
-                    </div>
-                  </td>
-                  <td className={classes}>
-                    <div className="w-max">
-                      <Chip
-                        variant="ghost"
-                        size="sm"
-                        value={status ? "Proses" : "Selesai"}
-                        color={status ? "green" : "blue"}
-                      />
-                    </div>
-                  </td>
-                  <td className={classes}>
-                    <div className="flex flex-col">
-                      <Typography variant="small" color="blue-gray" className="font-normal">
-                        {masalah}
-                      </Typography>
-                    </div>
-                  </td>
-                  <td className={classes}>
-                    <Tooltip content="Edit Pesanan">
-                      <IconButton variant="text" onClick={() => handleEditPesananClick(index)}>
-                        <PencilIcon className="h-4 w-4" />
-                      </IconButton>
-                    </Tooltip>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </CardBody>
-    </Card>
-      <footer className="flex font-roboto items-center justify-center md:ml-[0] ml-[19px] w-full">
-              <Text
-                className="mr-[644px] text-blue_gray-400 text-xl"
-                size="txtRobotoRomanRegular20"
-              >
-                <span className="text-blue_gray-400 font-roboto text-left font-normal">
-                  © 2023, made with ♥ by{" "}
-                </span>
-                <span className="text-blue_gray-400 font-roboto text-left font-bold">
-                  a_ikram
-                </span>
-                <span className="text-blue_gray-400 font-roboto text-left font-normal">
-                  {" "}
-                  hacker_web.
-                </span>
-              </Text>
-            </footer>
+        {/* Modal */}
+        <Modal
+  isOpen={modalIsOpen}
+  onRequestClose={closeModal}
+  contentLabel="Detail Modal"
+  className="modal"
+  style={{
+    overlay: {
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    content: {
+      backgroundColor: 'white',
+      borderRadius: '8px',
+      boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.2)',
+      overflow: 'hidden',
+      maxWidth: '100%', // Adjust the maximum width as needed
+      width: '50%', // Ensure content doesn't stretch to full width
+    },
+  }}
+>
+  <div className="p-6 w-full">
+    <div className="flex justify-between items-center mb-4">
+      <h2 className="text-3xl font-bold text-gray-800">Detail Bengkel</h2>
+      <button
+        onClick={closeModal}
+        className="text-gray-500 hover:text-gray-700 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none"
+      >
+        Tutup
+      </button>
+    </div>
+    {selectedData && (
+      <div className="space-y-3">
+        <p className="text-lg text-gray-700">
+          <span className="font-semibold">Name:</span><hr /> {selectedData.name}
+        </p>
+        <p className="text-lg text-gray-700">
+          <span className="font-semibold">Status:</span><hr /> {selectedData.status}
+        </p>
+        <p className="text-lg text-gray-700">
+          <span className="font-semibold">montir:</span> <hr />{selectedData.montir}
+        </p>
+        <p className="text-lg text-gray-700">
+          <span className="font-semibold">Masalah:</span><hr /> {selectedData.masalah}
+        </p>
+        
+      </div>
+    )}
+    <div className="flex justify-end mt-6">
+      <button
+        className="bg-blue-500 hover:bg-gray-500 text-gray-100 font-bold py-2 px-4 rounded-full mr-4 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:shadow-outline-green active:scale-100"
+        // Add your Terima function here
+        onClick={closeModal}
+      >
+        Terima
+      </button>
+      <button
+        className="bg-red-500 hover:bg-red-700 text-gray-100 font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:shadow-outline-red active:scale-100"
+         // Add your Tolak function here
+         onClick={closeModal}
+      >
+        Tolak
+      </button>
+    </div>
+  </div>
+</Modal>
+
+
+
+
+
+      </div>
+    </div>
+
+      </div>
+      
     </>
   );
 };

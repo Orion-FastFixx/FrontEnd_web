@@ -22,68 +22,69 @@ const DaftarPage = () => {
             src="images/img_vector1.png"
             alt="vectorOne"
           />
-          <div className="absolute flex flex-col inset-x-[0] items-center justify-start mx-auto top-[0] w-[39%]">
-            <div className="bg-white-A700 flex flex-col items-center justify-center p-20 md:px-10 sm:px-5 rounded-[10px] shadow-bs w-full">
-              <div className="flex flex-col items-center justify-start my-0.5 w-full">
-                <div className="flex flex-col gap-9 items-center justify-start w-auto sm:w-full">
-                  <Text
-                    className="text-4xl sm:text-[32px] md:text-[34px] text-black-900 tracking-[-0.72px] w-auto"
-                    size="txtMonaSansBold36Black900"
-                  >
-                    Daftar Akun
-                  </Text>
-                  <div className="flex flex-col gap-9 items-center justify-start w-full">
-                    <div className="flex flex-col gap-6 items-start justify-start w-auto sm:w-full">
-                      <div className="flex flex-col gap-3 items-start justify-start w-auto sm:w-full">
-                        <Text
-                          className="text-gray-900 text-xl tracking-[-0.40px] w-auto"
-                          size="txtMonaSansBold20Gray900"
-                        >
-                          Email
-                        </Text>
-                        <Input
-                          name="frameEleven"
-                          placeholder="Email anda"
-                          className="leading-[normal] p-0 placeholder:text-gray-600 text-base text-left w-full"
-                          wrapClassName="w-full"
-                          type="email"
-                          color="gray_50"
-                          size="md"
-                        ></Input>
-                      </div>
-                      <div className="flex flex-col gap-3 items-start justify-start w-auto sm:w-full">
-                        <Text
-                          className="text-gray-900 text-xl tracking-[-0.40px] w-auto"
-                          size="txtMonaSansBold20Gray900"
-                        >
-                          Password
-                        </Text>
-                        <Input
-                          name="frameEleven_One"
-                          placeholder="Password anda"
-                          className="leading-[normal] p-0 placeholder:text-gray-600 text-base text-left w-full"
-                          wrapClassName="w-full"
-                          type="password"
-                          color="gray_50"
-                          size="md"
-                        ></Input>
-                      </div>
-                    </div>
-                    <Button
-                      className="common-pointer !text-white-A700 cursor-pointer font-bold leading-[normal] text-center text-lg w-[400px]"
-                      onClick={() => navigate("/masuk")}
-                      shape="round"
-                      color="red_600"
-                      size="md"
-                      variant="fill"
-                    >
-                      Daftar
-                    </Button>
-                  </div>
-                </div>
-              </div>
+         <div className="absolute flex flex-col inset-x-[0] items-center justify-start mx-auto top-[0] w-[39%]">
+  <div className="bg-white-A700 flex flex-col items-center justify-center p-20 md:px-10 sm:px-5 rounded-[10px] shadow-bs w-full">
+    <div className="flex flex-col items-center justify-start my-0.5 w-full">
+      <div className="flex flex-col gap-9 items-center justify-start w-auto sm:w-full">
+        <Text
+          className="text-4xl sm:text-[32px] md:text-[34px] text-black-900 tracking-[-0.72px] w-auto"
+          size="txtMonaSansBold36Black900"
+        >
+   Bergabung Bersama kami!!
+        </Text>
+        <div className="flex flex-col gap-9 items-center justify-start w-full">
+          <div className="flex flex-col gap-6 items-start justify-start w-auto sm:w-full">
+            <div className="flex flex-col gap-3 items-start justify-start w-auto sm:w-full">
+              <Text
+                className="text-gray-900 text-xl tracking-[-0.40px] w-auto"
+                size="txtMonaSansBold20Gray900"
+              >
+                Email
+              </Text>
+              <Input
+                name="frameEleven"
+                placeholder="Email anda"
+                className="leading-[normal] p-0 placeholder:text-gray-600 text-base text-left w-full"
+                wrapClassName="w-full"
+                type="email"
+                color="gray_50"
+                size="md"
+              ></Input>
+            </div>
+            <div className="flex flex-col gap-3 items-start justify-start w-auto sm:w-full">
+              <Text
+                className="text-gray-900 text-xl tracking-[-0.40px] w-auto"
+                size="txtMonaSansBold20Gray900"
+              >
+                Password
+              </Text>
+              <Input
+                name="frameEleven_One"
+                placeholder="Password anda"
+                className="leading-[normal] p-0 placeholder:text-gray-600 text-base text-left w-full"
+                wrapClassName="w-full"
+                type="password"
+                color="gray_50"
+                size="md"
+              ></Input>
             </div>
           </div>
+          <Button
+            className="common-pointer !text-white-A700 cursor-pointer font-bold leading-[normal] text-center text-lg w-[400px]"
+            onClick={() => navigate("/setupakun")}
+            shape="round"
+            color="red_600"
+            size="md"
+            variant="fill"
+          >
+            Daftar
+          </Button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
         </div>
       </div>
     </>

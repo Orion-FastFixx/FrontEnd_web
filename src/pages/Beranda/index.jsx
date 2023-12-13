@@ -1,14 +1,40 @@
-import React from "react";
+import React,{ useEffect }  from "react";
 
 import { useNavigate } from "react-router-dom";
 
 import { Button, Img, Text } from "components";
 import Footer from "components/Footer";
 
+
+
+
+
+
+
 const BerandaPage = () => {
   const navigate = useNavigate();
+ 
+  useEffect(() => {
+    // Define the chatbot options
+    window.watsonAssistantChatOptions = {
+      integrationID: "a8ecfb20-9063-4367-ad80-409a62dbfc81",
+      region: "us-south",
+      serviceInstanceID: "60ec2b36-3ebe-470f-bcd8-e4a556eb3f4d",
+      onLoad: async (instance) => { await instance.render(); }
+    };
 
-  return (
+    // Dynamically load the chatbot script
+    const script = document.createElement('script');
+    script.src = "https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js"
+    document.head.appendChild(script);
+
+    // Cleanup function to remove the script when the component unmounts
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, []);
+    return (
+    
     <>
       <div className="bg-gray-50 flex flex-col font-monasans items-center justify-start mx-auto w-full">
         <header className="bg-gray-50 flex md:flex-col md:gap-10 h-[105px] md:h-auto items-center justify-between px-40 md:px-5 w-full">
@@ -20,7 +46,7 @@ const BerandaPage = () => {
           <div className="flex sm:flex-1 sm:flex-col flex-row gap-6 items-center justify-center w-auto sm:w-full">
             <div className="flex flex-col items-center justify-center w-auto">
               <Text
-                className="text-gray-900 text-lg w-auto"
+                className="text-red-600  text-xl w-auto"
                 size="txtMonaSansRegular18"
               >
                 Beranda
@@ -40,7 +66,7 @@ const BerandaPage = () => {
             >
               Kontak
             </Button>
-            <Button
+            {/* <Button
               className="border border-red-600 border-solid cursor-pointer font-bold leading-[normal] min-w-[117px] text-center text-lg"
               shape="round"
               color="gray_50"
@@ -57,7 +83,7 @@ const BerandaPage = () => {
               variant="fill"
             >
               Daftar
-            </Button>
+            </Button> */}
           </div>
         </header>
         <div className="sm:h-[2035px] h-[2283px] md:h-[2336px] md:px-5 relative w-full">
@@ -169,13 +195,12 @@ const BerandaPage = () => {
                     </div>
                   </div>
                 </div>
-                <div className="bg-gray-900 flex flex-col items-start justify-start mb-[527px] p-7 sm:px-5 rounded-[42px] w-auto">
-                  <Img
-                    className="h-[29px] w-8"
-                    src="images/img_user.svg"
-                    alt="user"
-                  />
-                </div>
+                
+  
+
+
+
+
               </div>
               <div className="flex flex-col md:gap-10 gap-16 items-center justify-start md:ml-[0] ml-[168px] w-auto md:w-full">
                 <Text
@@ -256,9 +281,14 @@ const BerandaPage = () => {
           </div>
         </div>
         <Footer className="bg-gray-50 flex h-[186px] md:h-auto items-center justify-between px-40 md:px-5 py-[61px] w-full" />
+       {/* <Chatbox/> */}
+       
+   
       </div>
+
     </>
   );
+  
 };
 
 export default BerandaPage;

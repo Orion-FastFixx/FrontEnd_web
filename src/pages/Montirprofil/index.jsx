@@ -88,7 +88,7 @@ const MontirProfil = () => {
                 <div className="h-11 mr-6 w-11 bg-gray-50 shadow-bs p-3 rounded-[10px]">
                   <Img
                     className="h-5 my-auto"
-                    src="images/img_lock.svg"
+                    src="images/img_contrast.svg"
                     alt="lock"
                   />
                 </div>
@@ -106,7 +106,7 @@ const MontirProfil = () => {
                 <div className="h-11 mr-6 w-11 bg-gray-50 shadow-bs p-[13px] rounded-[10px]">
                   <Img
                     className="h-[18px] my-auto"
-                    src="images/img_clock_red_600.svg"
+                    src="images/img_clock.svg"
                     alt="clock"
                   />
                 </div>
