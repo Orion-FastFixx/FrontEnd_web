@@ -139,13 +139,13 @@ const TentangKamiPage = () => {
     <div className="flex-col mr-4">
       <TeamMember name="Adzhimatinur Azzahra" role="Project Manager" imageSrc="public/images/zahra.PNG" />
       <br />
+      <TeamMember name="Nurul Fatma Putri Lazira" role="Scrum Master & Hacker" imageSrc="public/images/rul.PNG" />
+      <br />
       <TeamMember name="Muhammad Ikram Jundulloh" role="Hacker" imageSrc="public/images/gw.PNG" />
       <br />
       <TeamMember name="Rayhan Illyas A" role=" Hacker" imageSrc="public/images/ray.PNG" />
       <br />
       <TeamMember name="Raynaldi Nugroho" role="Hacker" imageSrc="public/images/rey.PNG" />
-      <br />
-      <TeamMember name="Nurul Lazira" role="Hacker" imageSrc="public/images/rul.PNG" />
       <br />
       <TeamMember name="Fikry Azraq Arista" role="Hipster" imageSrc="public/images/fikri.PNG" />
       <br />

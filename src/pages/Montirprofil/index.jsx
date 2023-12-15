@@ -2,11 +2,10 @@
 import { Link } from "react-router-dom"; // Import Link dari React Router
 import { Img, Input, Line, Text } from "components";
 import NavbarDashboard from "components/NavbarDashboard";
-import React, { useState } from "react";
-
-
+import React, { useEffect, useState } from "react";
 
 const MontirProfil = () => {
+
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 

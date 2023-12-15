@@ -1,14 +1,38 @@
 
 import { Link } from "react-router-dom";
 import { Img,  Line, Text } from "components";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from "react";
 import Modal from 'react-modal';
 import NavbarDashboard from "components/NavbarDashboard";
+import axios from "axios";
 
-
- 
 
 const AdminMontir = () => {
+
+  const [montirs, setMontir] = useState([]);
+
+  useEffect (() => {
+    getMontir();
+  }, [])
+
+  const getMontir = async () => {
+    try {
+      const response = await axios.get('http://localhost:3000/api/v1/admin/list-montir', {
+        headers: {
+          Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAyNjAwMDgzLCJleHAiOjE3MDI2NDMyODN9.dNJxIu5XX75tMhp_DPsWtYvAVPc77cWywewtGMR-uQs"
+        }
+      });
+
+      console.log(response)
+  
+      setMontir(response.data);
+
+  
+    } catch (error) {
+      console.error("Error fetching montirs:", error);
+    }
+  };
+
   const [modalIsOpen, setIsOpen] = useState(false);
   const [selectedData, setSelectedData] = useState(null);
 
