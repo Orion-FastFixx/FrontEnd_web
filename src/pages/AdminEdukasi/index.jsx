@@ -370,24 +370,33 @@ const AdminEdukasi = () => {
         className="w-full mb-4 p-2 border rounded"
       />
        <label htmlFor="jenis_kendaraan">Jenis Kendaraan:</label>
-      <input
-        type="text"
-        id="jenis_kendaraan"
-        name="jenis_kendaraan"
-        value={formData.jenis_kendaraan}
-        onChange={handleInputChange}
-        className="w-full mb-4 p-2 border rounded"
-      /> 
-      
-      <label htmlFor="kategori">Kategori:</label>
-      <input
-        type="text"
-        id="kategori"
-        name="kategori"
-        value={formData.kategori}
-        onChange={handleInputChange}
-        className="w-full mb-4 p-2 border rounded"
-      />
+<select
+  id="jenis_kendaraan"
+  name="jenis_kendaraan"
+  value={formData.jenis_kendaraan}
+  onChange={handleInputChange}
+  className="w-full mb-4 p-2 border rounded"
+>
+  <option value="">Pilih Jenis Kendaraan</option>
+  <option value="mobil">Mobil</option>
+  <option value="motor">Motor</option>
+</select>
+
+<label htmlFor="kategori">Kategori:</label>
+<select
+  id="kategori"
+  name="kategori"
+  value={formData.kategori}
+  onChange={handleInputChange}
+  className="w-full mb-4 p-2 border rounded"
+>
+  <option value="">Pilih Kategori</option>
+  <option value="tips">Tips</option>
+  <option value="interior">Interior</option>
+  <option value="exterior">Exterior</option>
+  <option value="mesin">Mesin</option>
+</select>
+
        <label htmlFor="sub_judul">Sub judul:</label>
       <input
         type="text"
