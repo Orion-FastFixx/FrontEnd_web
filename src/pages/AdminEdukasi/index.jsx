@@ -1,53 +1,125 @@
 import React, { useState, useEffect } from "react";
-
 import { Link } from "react-router-dom";
 import { Img,  Line, Text } from "components";
 import NavbarDashboard from "components/NavbarDashboard";
 import Modal from 'react-modal';
+import axios from "axios";
+
+
+
 
 
 const AdminEdukasi = () => {
-  const [eduData, setEduData] = useState([
-    { id: 1, title: 'Manfaat Ganti  Oli Berkala', description: 'Kapan Waktu Yang tepat ...' },
-    { id: 2, title: 'Pentingnya Pemeriksaan ban ', description: 'Tips berkendara aman' },
-    // ... more data
-  ]);
+  
+  const [edukasis, setEdukasi] = useState([]);
+  const [modalAddIsOpen, setModalAddIsOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    judul: "",
+    kategori: "",
+    // ... other properties
+  });
 
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [newEdu, setNewEdu] = useState({ title: '', description: '' });
+ 
 
-  const handleEdit = (id) => {
-    // Implement edit functionality here
-    console.log(`Edit clicked for ID: ${id}`);
+
+  useEffect (() => {
+    getEdukasi();
+  }, [])
+
+  const getEdukasi = async () => {
+
+    try {
+      const response = await axios.get('http://localhost:3000/api/v1/admin/list-education', {
+        headers: {
+          Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImlhdCI6MTcwMjg2MTE2NCwiZXhwIjoxNzAyOTA0MzY0fQ.7mmUoZ-yXWj6WXQZZ0Z030moD_MyLKPqlX9Y_dYBIho"
+        }
+      });
+
+      // console.log(response)
+  
+      setEdukasi(response.data);
+
+  
+    } catch (error) {
+      console.error("Error fetching Edukasi:", error);
+    }
+  };
+  
+  const handleDeleteRequest = async (id) => {
+    try {
+      const response = await axios.delete(`http://localhost:3000/api/v1/admin/delete-education/${id}`, {
+        headers: {
+          Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImlhdCI6MTcwMjg2MTE2NCwiZXhwIjoxNzAyOTA0MzY0fQ.7mmUoZ-yXWj6WXQZZ0Z030moD_MyLKPqlX9Y_dYBIho"
+        }
+      });
+    
+      console.log('Data berhasil dihapus:', response.data);
+    
+      // Refresh data setelah berhasil menghapus
+      getEdukasi();
+    } catch (error) {
+      console.error('Error deleting data:', error);
+    }
+    
   };
 
-  const handleDelete = (id) => {
-    // 
-    const updatedEduData = eduData.filter(edu => edu.id !== id);
-  setEduData(updatedEduData);
-    console.log(`Delete clicked for ID: ${id}`);
+
+  const openModalAdd = () => {
+    setModalAddIsOpen(true);
   };
 
-  const handleAdd = () => {
-    setModalIsOpen(true);
+  const closeModalAdd = () => {
+    setModalAddIsOpen(false);
   };
 
-  const handleCloseModal = () => {
-    setModalIsOpen(false);
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
-  const handleSave = () => {
-    setEduData([...eduData, { id: eduData.length + 1, ...newEdu }]);
-    setNewEdu({ title: '', description: '' });
-    setModalIsOpen(false);
+  const handleAddData = async () => {
+    try {
+      await axios.post('http://localhost:3000/api/v1/admin/add-education', formData, {
+        headers: {
+          Authorization: "Bearer YOUR_ACCESS_TOKEN_HERE"
+        }
+      });
+
+      getEdukasi();
+      closeModalAdd();
+    } catch (error) {
+      console.error("Error adding Edukasi:", error);
+    }
   };
 
+  
+
+  const dataEdukasi= edukasis.data
+  console.log(dataEdukasi);
+  dataEdukasi?.map(e=>console.log(e))
+  
+  
+
+
+  
+  const [dataDetail, setDataDetail] = useState({});
+  const [modalDetailIsOpen, setModalDetailIsOpen] = useState(false);
+  const openModalDetail = (data) => {
+    setDataDetail(data);
+    setModalDetailIsOpen(true);
+  };
+
+  const closeModalDetail = () => {
+    setModalDetailIsOpen(false);
+  };
 
   return (
     <>
     <div className="flex">
   {/* Sidebar */}
-  <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-white h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
+  <div className="sticky top-0 flex flex-col bg-clip-border rounded-xl bg-white text-white h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
   <div className="mb-2 p-4">
           <Img
             className="h-[75px] md:ml-[0] ml-[13px]"
@@ -119,57 +191,73 @@ const AdminEdukasi = () => {
   <div className="w-full">
       {/* Navbar */}
       <NavbarDashboard />
-
+        {/* <MembersTable/> */}
       {/* Content */}
       <div>
       <div className="flex justify-end mb-4 mr-4 mt-4">
-  <button
-    onClick={handleAdd}
-    className="bg-gray-500 hover:bg-gray-700 text-gray-100 font-bold py-2 px-4 rounded"
-  >
-    Tambah
-  </button>
-</div>
+        <button
+          onClick={openModalAdd}
+          className="bg-gray-500 hover:bg-gray-700 text-gray-100 font-bold py-2 px-4 rounded"
+        >
+          Tambah
+        </button>
+      </div>
 
 
 
       <table className="min-w-full divide-y divide-gray-200">
   <thead className="bg-gray-500 text-gray-100">
-    <tr>
+    <tr
+    >
       <th className="py-3 px-6 text-left">Judul</th>
-      <th className="py-3 px-6 text-left">Deskripsi</th>
+      <th className="py-3 px-6 text-left">Kategori</th>
+      <th className="py-3 px-6 text-left">Tanggal</th>
       <th className="py-3 px-6 text-left">Aksi</th>
+      <th className="py-3 px-6 text-left">Detail</th>
     </tr>
   </thead>
   <tbody>
-    {eduData.map((edu) => (
-      <tr key={edu.id} className="bg-gray-100 hover:bg-gray-50">
-        <td className="py-4 px-6">{edu.title}</td>
-        <td className="py-4 px-6">{edu.description}</td>
+    {dataEdukasi?.map((data, index) => (
+      <tr key={index} className="bg-gray-100 hover:bg-gray-50">
+        <td className="py-4 px-6">{data.judul}</td>
+        <td className="py-4 px-6">{data.kategori}</td>
+        <td className="py-4 px-6">{data.updatedAt }</td>
         <td className="py-4 px-6">
           <button
-            onClick={() => handleEdit(edu.id)}
+            onClick={() => handle(edu.id)}
             className="bg-blue-500 hover:bg-blue-700 text-gray-100 font-bold py-2 px-4 rounded mr-2"
           >
             Edit
           </button>
           <button
-            onClick={() => handleDelete(edu.id)}
+             onClick={() => handleDeleteRequest(data.id)} 
             className="bg-red-500 hover:bg-red-700 text-gray-100 font-bold py-2 px-4 rounded"
           >
             Hapus
           </button>
         </td>
+        <td className="px-6 py-4 whitespace-nowrap">
+              <button
+  onClick={() => openModalDetail(data)} 
+  className="bg-blue-500 hover:bg-red-700 text-gray-100 font-bold py-2 px-4 rounded border border-blue-500"
+>
+  Detail
+</button>
+
+              </td>
       </tr>
     ))}
   </tbody>
 </table>
 
       {/* Modal for Add */}
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={handleCloseModal}
-        contentLabel="Tambah Edukasi Modal"
+      
+      
+     {/* Modal for Detail */}
+     <Modal
+        isOpen={modalDetailIsOpen}
+        onRequestClose={closeModalDetail}
+        contentLabel="Detail Edukasi Modal"
         className="modal"
         style={{
           overlay: {
@@ -182,60 +270,104 @@ const AdminEdukasi = () => {
             backgroundColor: 'gray-100',
             borderRadius: '8px',
             boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.2)',
-            overflow: 'hidden',
-            maxWidth: '50%',
-            width: 'fit-content',
+            overflow: 'auto',
+            width:'700px',
+            maxHeight: '90%', // ubah nilai ini untuk membuat modal bisa di sceoll kebawah
           },
-        }}
+       }}
       >
-        <div className="p-6 w-full max-w-md bg-gray-100">
-          <h2 className="text-3xl font-bold mb-4 text-red-600">Tambah Edukasi</h2>
-          <form>
-            <div className="mb-4">
-              <label htmlFor="title" className="block text-sm font-medium text-gray-600">
-                Judul
-              </label>
-              <input
-                type="text"
-                id="title"
-                name="title"
-                value={newEdu.title}
-                onChange={(e) => setNewEdu({ ...newEdu, title: e.target.value })}
-                className="mt-1 p-2 border rounded-md w-full"
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="description" className="block text-sm font-medium text-gray-600">
-                Deskripsi
-              </label>
-              <textarea
-                id="description"
-                name="description"
-                value={newEdu.description}
-                onChange={(e) => setNewEdu({ ...newEdu, description: e.target.value })}
-                rows="4"
-                className="mt-1 p-2 border rounded-md w-full"
-              />
-            </div>
-            <button
-              type="button"
-              onClick={handleSave}
-              className="bg-blue-500 hover:bg-blue-700 text-gray-100 font-bold py-2 px-4 rounded-full mt-6 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:shadow-outline-blue active:scale-100"
-            >
-              Simpan
-            </button>
-            <button
-              type="button"
-              onClick={handleCloseModal}
-              className="bg-red-500 hover:bg-red-700 text-gray-100 font-bold py-2 px-4 rounded-full mt-6 ml-4 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:shadow-outline-red active:scale-100"
-            >
-              Batal
-            </button>
-          </form>
-        </div>
-      </Modal>
+        <div className="p-6 w-full max-w-full bg-gray-100">
+ <h2 className="text-3xl font-bold mb-4 text-blue-500">Detail Edukasi</h2>
+ <div>
+    <p className="text-gray-600 font-medium mb-2">Judul:</p>
+    <p className="text-gray-800">{dataDetail.judul}</p>
+ </div>
+ <div className="mt-4">
+    <p className="text-gray-600 font-medium mb-2">Sub Judul:</p>
+    <p className="text-gray-800">{dataDetail.sub_judul}</p>
+ </div>
+ 
+ <div className="mt-4">
+    <p className="text-gray-600 font-medium mb-2">Kategori:</p>
+    <p className="text-gray-800">{dataDetail.kategori}</p>
+ </div>
+ <div className="mt-4">
+    <p className="text-gray-600 font-medium mb-2">Jenis Kendaraan:</p>
+    <p className="text-gray-800">{dataDetail.jenis_kendaraan}</p>
+ </div>
+ <div className="mt-4">
+    <p className="text-gray-600 font-medium mb-2">Foto:</p>
+    <img src={dataDetail.foto_url} alt="Foto edukasi" className="w-full h-64 object-cover mb-4" />
+ </div>
+ <div className="mt-4">
+    <p className="text-gray-600 font-medium mb-2">Isi Konten:</p>
+    <p className="text-gray-800">{dataDetail.isi_konten}</p>
+ </div>
 
-   
+ 
+ <button
+    type="button"
+    onClick={closeModalDetail}
+    className="bg-blue-500 hover:bg-blue-700 text-gray-100 font-bold py-2 px-4 rounded-full mt-6 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:shadow-outline-blue active:scale-100"
+ >
+    Tutup
+ </button>
+</div>
+      </Modal>
+      <Modal
+  isOpen={modalAddIsOpen}
+  onRequestClose={closeModalAdd}
+  contentLabel="Add Edukasi Modal"
+  className="modal"
+  style={{
+    overlay: {
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    content: {
+      backgroundColor: '#f8f9fa', // Light gray background
+      borderRadius: '8px',
+      boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.2)',
+      overflow: 'auto',
+      width: '700px', // Adjusted width to match the "Detail Edukasi Modal"
+      maxHeight: '90%',
+    },
+  }}
+>
+  <div className="p-6 w-full max-w-full bg-gray-100">
+    <h2 className="text-3xl font-bold mb-4 text-blue-500">Tambah Edukasi</h2>
+    <form>
+      <label htmlFor="judul">Judul:</label>
+      <input
+        type="text"
+        id="judul"
+        name="judul"
+        value={formData.judul}
+        onChange={handleInputChange}
+        className="w-full mb-4 p-2 border rounded"
+      />
+      {/* Add other form fields here */}
+      <button
+        type="button"
+        onClick={handleAddData}
+        className="bg-blue-500 hover:bg-blue-700 text-gray-100 font-bold py-2 px-4 rounded-full mt-6 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:shadow-outline-blue active:scale-100"
+      >
+        Tambah
+      </button>
+    </form>
+
+    <button
+      onClick={closeModalAdd}
+      className="bg-gray-500 hover:bg-gray-700 text-gray-100 font-bold py-2 px-4 rounded-full mt-6 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:shadow-outline-gray active:scale-100"
+    >
+      Batal
+    </button>
+  </div>
+</Modal>
+
+
     </div>
       
     </div>

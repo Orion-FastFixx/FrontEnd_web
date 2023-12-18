@@ -1,14 +1,45 @@
 
 import { Link } from "react-router-dom";
 import { Img,  Line, Text } from "components";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import NavbarDashboard from "components/NavbarDashboard";
+import axios from "axios";
 
 
  
 
 const AdminBengkel = () => {
+  const [bengkels, setBengkel] = useState([]);
+
+  useEffect (() => {
+    getBengkel();
+  }, [])
+
+  const getBengkel = async () => {
+
+    try {
+      const response = await axios.get('http://localhost:3000/api/v1/admin/list-bengkel', {
+        headers: {
+          Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTcwMjc4MjA4NywiZXhwIjoxNzAyODI1Mjg3fQ.eG0kWAg6hG9ZwsF4l9n3kba0nkGqt9HI3hyAgEavfcY"
+        }
+      });
+
+      // console.log(response)
+  
+      setBengkel(response.data);
+
+  
+    } catch (error) {
+      console.error("Error fetching bengkels:", error);
+    }
+  };
+  const dataBengkel= bengkels.data
+  console.log(dataBengkel);
+  dataBengkel?.map(e=>console.log(e))
+  
+
+
   const [modalIsOpen, setIsOpen] = useState(false);
   const [selectedData, setSelectedData] = useState(null);
 
@@ -56,8 +87,8 @@ const AdminBengkel = () => {
     <>
     <div className="flex">
   {/* Sidebar */}
-  <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-white h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
-  <div className="mb-2 p-4">
+  <div className="sticky top-0 flex flex-col bg-clip-border rounded-xl bg-white text-white h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
+   <div className="mb-2 p-4">
           <Img
             className="h-[75px] md:ml-[0] ml-[13px]"
             src="images/img_layerx00201.svg"
@@ -147,13 +178,13 @@ const AdminBengkel = () => {
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
-          {tableData.map((data, index) => (
+          {dataBengkel?.map((data, index) => (
             <tr key={index}>
-              <td className="px-6 py-4 whitespace-nowrap">{data.name}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{data.status}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{data.email}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{data.phone}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{data.jenisBengkel}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{data.nama_bengkel}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{data.is_open}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{data.lokasi}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{data.phone_bengkel}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{data.jenis_bengkel}</td>
               <td className="px-6 py-4 whitespace-nowrap">
               <button
   onClick={() => openModal(data)}

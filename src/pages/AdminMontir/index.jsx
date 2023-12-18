@@ -7,6 +7,7 @@ import NavbarDashboard from "components/NavbarDashboard";
 import axios from "axios";
 
 
+
 const AdminMontir = () => {
 
   const [montirs, setMontir] = useState([]);
@@ -16,14 +17,15 @@ const AdminMontir = () => {
   }, [])
 
   const getMontir = async () => {
+
     try {
       const response = await axios.get('http://localhost:3000/api/v1/admin/list-montir', {
         headers: {
-          Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAyNjAwMDgzLCJleHAiOjE3MDI2NDMyODN9.dNJxIu5XX75tMhp_DPsWtYvAVPc77cWywewtGMR-uQs"
+          Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImlhdCI6MTcwMjg2MTE2NCwiZXhwIjoxNzAyOTA0MzY0fQ.7mmUoZ-yXWj6WXQZZ0Z030moD_MyLKPqlX9Y_dYBIho"
         }
       });
 
-      console.log(response)
+      // console.log(response)
   
       setMontir(response.data);
 
@@ -32,7 +34,10 @@ const AdminMontir = () => {
       console.error("Error fetching montirs:", error);
     }
   };
-
+  const dataMontir= montirs.data
+  console.log(dataMontir);
+  dataMontir?.map(e=>console.log(e))
+  
   const [modalIsOpen, setIsOpen] = useState(false);
   const [selectedData, setSelectedData] = useState(null);
 
@@ -80,7 +85,7 @@ const AdminMontir = () => {
     <>
     <div className="flex">
   {/* Sidebar */}
-  <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-white h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
+  <div className="sticky top-0 flex flex-col bg-clip-border rounded-xl bg-white text-white h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
   <div className="mb-2 p-4">
           <Img
             className="h-[75px] md:ml-[0] ml-[13px]"
@@ -155,6 +160,7 @@ const AdminMontir = () => {
   <div className="w-full">
       {/* Navbar */}
       <NavbarDashboard />
+      
 
       {/* Content */}
       <div className="bg-white rounded shadow p-4 mt-4">
@@ -164,20 +170,19 @@ const AdminMontir = () => {
           <tr>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No Telepon</th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jenis Montir</th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Detail</th>
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
-          {tableData.map((data, index) => (
+          {dataMontir?.map((data, index) => (
             <tr key={index}>
-              <td className="px-6 py-4 whitespace-nowrap">{data.name}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{data.status}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{data.email}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{data.nama}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{data.is_available}</td>
+              
               <td className="px-6 py-4 whitespace-nowrap">{data.phone}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{data.jenisMontir}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{data.jenis_montir}</td>
               <td className="px-6 py-4 whitespace-nowrap">
               <button
   onClick={() => openModal(data)}
@@ -220,19 +225,16 @@ const AdminMontir = () => {
     {selectedData && (
       <div className="space-y-3">
         <p className="text-lg text-gray-700">
-          <span className="font-semibold">Name:</span><hr /> {selectedData.name}
+          <span className="font-semibold">Name:</span><hr /> {selectedData.nama}
         </p>
         <p className="text-lg text-gray-700">
-          <span className="font-semibold">Status:</span><hr /> {selectedData.status}
-        </p>
-        <p className="text-lg text-gray-700">
-          <span className="font-semibold">Email:</span> <hr />{selectedData.email}
+          <span className="font-semibold">Status:</span><hr /> {selectedData.is_available}
         </p>
         <p className="text-lg text-gray-700">
           <span className="font-semibold">No Telepon:</span><hr /> {selectedData.phone}
         </p>
         <p className="text-lg text-gray-700">
-          <span className="font-semibold">Jenis Bengkel:</span><hr /> {selectedData.jenisMontir}
+          <span className="font-semibold">Jenis Bengkel:</span><hr /> {selectedData.jenis_montir}
         </p>
       </div>
     )}

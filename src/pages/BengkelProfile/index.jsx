@@ -21,8 +21,8 @@ const BengkelProfile = () => {
   return (
     <div className="flex">
       {/* Sidebar */}
-      <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-white h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
-        <div className="mb-2 p-4">
+      <div className="sticky top-0 flex flex-col bg-clip-border rounded-xl bg-white text-white h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
+   <div className="mb-2 p-4">
           <Img
             className="h-[75px] md:ml-[0] ml-[13px]"
             src="images/img_layerx00201.svg"
