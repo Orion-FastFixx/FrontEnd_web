@@ -16,7 +16,12 @@ const AdminEdukasi = () => {
   const [formData, setFormData] = useState({
     judul: "",
     kategori: "",
-    // ... other properties
+    sub_judul:"",
+    jenis_kendaraan:"",
+    foto_url:"",
+    isi_konten:"",
+    
+    
   });
 
  
@@ -31,7 +36,7 @@ const AdminEdukasi = () => {
     try {
       const response = await axios.get('http://localhost:3000/api/v1/admin/list-education', {
         headers: {
-          Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImlhdCI6MTcwMjg2MTE2NCwiZXhwIjoxNzAyOTA0MzY0fQ.7mmUoZ-yXWj6WXQZZ0Z030moD_MyLKPqlX9Y_dYBIho"
+          Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImlhdCI6MTcwMjg3ODk5OCwiZXhwIjoxNzAyOTIyMTk4fQ.Vxbvd1j26-USqNg-NNOxLnC47f5C4hjT36n8h1kV4pk"
         }
       });
 
@@ -49,7 +54,7 @@ const AdminEdukasi = () => {
     try {
       const response = await axios.delete(`http://localhost:3000/api/v1/admin/delete-education/${id}`, {
         headers: {
-          Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImlhdCI6MTcwMjg2MTE2NCwiZXhwIjoxNzAyOTA0MzY0fQ.7mmUoZ-yXWj6WXQZZ0Z030moD_MyLKPqlX9Y_dYBIho"
+          Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImlhdCI6MTcwMjg3ODk5OCwiZXhwIjoxNzAyOTIyMTk4fQ.Vxbvd1j26-USqNg-NNOxLnC47f5C4hjT36n8h1kV4pk"
         }
       });
     
@@ -81,19 +86,35 @@ const AdminEdukasi = () => {
 
   const handleAddData = async () => {
     try {
-      await axios.post('http://localhost:3000/api/v1/admin/add-education', formData, {
-        headers: {
-          Authorization: "Bearer YOUR_ACCESS_TOKEN_HERE"
+      
+      await axios.post(
+        'http://localhost:3000/api/v1/admin/create-education',
+        formData,
+        {
+          headers: {
+            Authorization:
+              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImlhdCI6MTcwMjg3ODk5OCwiZXhwIjoxNzAyOTIyMTk4fQ.Vxbvd1j26-USqNg-NNOxLnC47f5C4hjT36n8h1kV4pk',
+          },
         }
-      });
+      );
 
       getEdukasi();
       closeModalAdd();
+
+      // Reset the form data
+      setFormData({
+          judul: "",
+          kategori: "",
+          sub_judul:"",
+          jenis_kendaraan:"",
+          isi_konten:"",
+          foto_url:"",
+          
+      });
     } catch (error) {
-      console.error("Error adding Edukasi:", error);
+      console.error('Error adding Edukasi:', error);
     }
   };
-
   
 
   const dataEdukasi= edukasis.data
@@ -224,7 +245,7 @@ const AdminEdukasi = () => {
         <td className="py-4 px-6">{data.updatedAt }</td>
         <td className="py-4 px-6">
           <button
-            onClick={() => handle(edu.id)}
+            onClick={() => handle(data.id)}
             className="bg-blue-500 hover:bg-blue-700 text-gray-100 font-bold py-2 px-4 rounded mr-2"
           >
             Edit
@@ -345,6 +366,53 @@ const AdminEdukasi = () => {
         id="judul"
         name="judul"
         value={formData.judul}
+        onChange={handleInputChange}
+        className="w-full mb-4 p-2 border rounded"
+      />
+       <label htmlFor="jenis_kendaraan">Jenis Kendaraan:</label>
+      <input
+        type="text"
+        id="jenis_kendaraan"
+        name="jenis_kendaraan"
+        value={formData.jenis_kendaraan}
+        onChange={handleInputChange}
+        className="w-full mb-4 p-2 border rounded"
+      /> 
+      
+      <label htmlFor="kategori">Kategori:</label>
+      <input
+        type="text"
+        id="kategori"
+        name="kategori"
+        value={formData.kategori}
+        onChange={handleInputChange}
+        className="w-full mb-4 p-2 border rounded"
+      />
+       <label htmlFor="sub_judul">Sub judul:</label>
+      <input
+        type="text"
+        id="sub_judul"
+        name="sub_judul"
+        value={formData.sub_judul}
+        onChange={handleInputChange}
+        className="w-full mb-4 p-2 border rounded"
+      />
+
+      <label htmlFor="isi_konten">Isi Konten:</label>
+      <input
+        type="text"
+        id="isi_konten"
+        name="isi_konten"
+        value={formData.isi_konten}
+        onChange={handleInputChange}
+        className="w-full mb-4 p-2 border rounded"
+      />
+       <label htmlFor="foto_url">Foto:</label>
+      <input
+        type="file"
+        id="foto_url"
+        name="foto_url"
+        value={formData.foto_url}
         onChange={handleInputChange}
         className="w-full mb-4 p-2 border rounded"
       />

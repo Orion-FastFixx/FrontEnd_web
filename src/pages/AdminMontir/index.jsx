@@ -50,36 +50,38 @@ const AdminMontir = () => {
     setSelectedData(null);
     setIsOpen(false);
   }
- const tableData = [
-  {
-    name: "Ujang",
-    status: "Aktif",
-    email: "bengkelnasijamur@gmail.com",
-    phone: "081256985465",
-    jenisMontir: "Bengkel Resmi",
-  },
-  {
-    name: "Surya",
-    status: "Aktif",
-    email: "bengkelxyz@gmail.com",
-    phone: "081234567890",
-    jenisMontir: "Bengkel Resmi",
-  },
-  {
-    name: "Mikel",
-    status: "Nonaktif",
-    email: "bengkelabc@gmail.com",
-    phone: "087654321098",
-    jenisMontir: "Bengkel Resmi",
-  },
-  {
-    name: "Imam",
-    status: "Aktif",
-    email: "bengkelpqr@gmail.com",
-    phone: "089765432109",
-    jenisMontir: "Bengkel Resmi",
-  },
-];
+
+
+//  const tableData = [
+//   {
+//     name: "Ujang",
+//     status: "Aktif",
+//     email: "bengkelnasijamur@gmail.com",
+//     phone: "081256985465",
+//     jenisMontir: "Bengkel Resmi",
+//   },
+//   {
+//     name: "Surya",
+//     status: "Aktif",
+//     email: "bengkelxyz@gmail.com",
+//     phone: "081234567890",
+//     jenisMontir: "Bengkel Resmi",
+//   },
+//   {
+//     name: "Mikel",
+//     status: "Nonaktif",
+//     email: "bengkelabc@gmail.com",
+//     phone: "087654321098",
+//     jenisMontir: "Bengkel Resmi",
+//   },
+//   {
+//     name: "Imam",
+//     status: "Aktif",
+//     email: "bengkelpqr@gmail.com",
+//     phone: "089765432109",
+//     jenisMontir: "Bengkel Resmi",
+//   },
+// ];
 
   return (
     <>
@@ -179,8 +181,21 @@ const AdminMontir = () => {
           {dataMontir?.map((data, index) => (
             <tr key={index}>
               <td className="px-6 py-4 whitespace-nowrap">{data.nama}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{data.is_available}</td>
-              
+              <td className="px-6 py-4 whitespace-nowrap">
+        <span
+          style={{
+            backgroundColor: data.is_available ? '#3498db' : '#e74c3c',
+            display: 'inline-block',
+            padding: '6px',
+            borderRadius: '4px',
+            color: '#fff',
+            textAlign: 'center',
+            width: '100%', // Set width to 100% to span the entire cell
+          }}
+        >
+          {data.is_available ? 'Aktif' : 'Nonaktif'}
+        </span>
+      </td>
               <td className="px-6 py-4 whitespace-nowrap">{data.phone}</td>
               <td className="px-6 py-4 whitespace-nowrap">{data.jenis_montir}</td>
               <td className="px-6 py-4 whitespace-nowrap">
@@ -228,8 +243,11 @@ const AdminMontir = () => {
           <span className="font-semibold">Name:</span><hr /> {selectedData.nama}
         </p>
         <p className="text-lg text-gray-700">
-          <span className="font-semibold">Status:</span><hr /> {selectedData.is_available}
-        </p>
+  <span className="font-semibold">Status:</span>
+  <hr />
+  {selectedData.is_available ? "aktif" : "nonaktif"}
+</p>
+
         <p className="text-lg text-gray-700">
           <span className="font-semibold">No Telepon:</span><hr /> {selectedData.phone}
         </p>
