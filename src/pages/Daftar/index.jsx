@@ -71,7 +71,7 @@ const DaftarPage = () => {
           </div>
           <Button
             className="common-pointer !text-white-A700 cursor-pointer font-bold leading-[normal] text-center text-lg w-[400px]"
-            onClick={() => navigate("/setupakun")}
+            onClick={() => navigate("/masuk")}
             shape="round"
             color="red_600"
             size="md"

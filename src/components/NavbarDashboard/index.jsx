@@ -1,3 +1,4 @@
+import { Img } from "components";
 import React from "react";
 import { Link } from "react-router-dom"; 
 const NavbarDashboard = () => {
@@ -16,7 +17,14 @@ const NavbarDashboard = () => {
             className="w-8 h-8 rounded-full"
           />
           {/* Change the span to a Link with the "to" attribute pointing to your logout route */}
-          <Link to="/beranda" className="text-white">Logout</Link>
+    <Link to="/beranda" className="text-white">
+      {/* Use Img component with the logo URL */}
+      <Img
+        src="/images/logout.png"  // Replace with the actual path to your logo
+        alt="Logout"
+        className="w-8 h-8"  // Add your logo styling here
+      />
+    </Link>
         </div>
       </div>
     </nav>

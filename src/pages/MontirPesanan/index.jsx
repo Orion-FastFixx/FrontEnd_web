@@ -5,36 +5,10 @@ import { Img,  Line, Text } from "components";
 import NavbarDashboard from "components/NavbarDashboard";
 import Modal from 'react-modal';
 const BengkelPesanan = () => {
-  const [pesanans, setPesanan] = useState([]);
+  
   const [modalIsOpen, setIsOpen] = useState(false);
   const [selectedData, setSelectedData] = useState(null);
-  useEffect (() => {
-    getPesanan();
-  }, [])
 
-  const getPesanan = async () => {
-
-    try {
-      const response = await axios.get('http://localhost:3000/api/v1/admin/get-montir-order-service', {
-        headers: {
-          Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTcwMjc4MjA4NywiZXhwIjoxNzAyODI1Mjg3fQ.eG0kWAg6hG9ZwsF4l9n3kba0nkGqt9HI3hyAgEavfcY"
-        }
-      });
-
-      // console.log(response)
-  
-      setPesanan(response.data);
-
-  
-    } catch (error) {
-      console.error("Error fetching bengkels:", error);
-    }
-  };
-  const dataPesanan= pesanans.data
-  console.log(dataPesanan);
-  dataPesanan?.map(e=>console.log(e))
-  
-  
  
 
   function openModal(data) {
@@ -141,7 +115,7 @@ const BengkelPesanan = () => {
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
-          {dataPesanan?.map((data, index) => (
+          {tableData.map((data, index) => (
             <tr key={index}>
               <td className="px-6 py-4 whitespace-nowrap">{data.name}</td>
               <td className="px-6 py-4 whitespace-nowrap">{data.status}</td>
