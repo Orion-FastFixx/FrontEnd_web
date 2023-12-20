@@ -15,14 +15,20 @@ const BengkelLayanan = React.lazy(() => import("pages/BengkelLayanan"));
 const BengkelMontir = React.lazy(() => import("pages/BengkelMontir"));
 const BengkelProfile = React.lazy(() => import("pages/BengkelProfile"));
 const Masuk = React.lazy(() => import("pages/Masuk"));
+const MasukMontir = React.lazy(() => import("pages/MasukMontir"));
+const MasukBengkel = React.lazy(() => import("pages/MasukBengkel"));
 const Kontak = React.lazy(() => import("pages/Kontak"));
 const Beranda = React.lazy(() => import("pages/Beranda"));
+const Role = React.lazy(() => import("pages/PilihRole"));
 const ProjectRoutes = () => {
   return (
     <React.Suspense fallback={<>Sabar Yaa kaka......</>}>
       <Router>
         <Routes>
+          <Route path="/role" element={<Role />} />
           <Route path="/" element={<Beranda />} />
+          <Route path="/masukMontir" element={<MasukMontir />} />
+          <Route path="/masukBengkel" element={<MasukBengkel />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/beranda" element={<Beranda />} />
           <Route path="/kontak" element={<Kontak />} />

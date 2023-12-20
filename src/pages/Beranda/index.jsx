@@ -267,7 +267,7 @@ const BerandaPage = () => {
                 color="red_600"
                 size="xl"
                 variant="fill"
-                onClick={() => navigate("/daftar")}
+                onClick={() => navigate("/role")}
               >
                 Gabung Sekarang
               </Button>
