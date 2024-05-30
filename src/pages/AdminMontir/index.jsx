@@ -5,8 +5,6 @@ import Modal from 'react-modal';
 import NavbarDashboard from "components/NavbarDashboard";
 
 
- 
-
 const AdminMontir = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [selectedData, setSelectedData] = useState(null);

@@ -36,8 +36,8 @@ const BerandaPage = () => {
     return (
     
     <>
-      <div className="bg-gray-50 flex flex-col font-monasans items-center justify-start mx-auto w-full">
-        <header className="bg-gray-50 flex md:flex-col md:gap-10 h-[105px] md:h-auto items-center justify-between px-40 md:px-5 w-full">
+      <div className="mx-auto w-full" >
+        <header className="fixed top-0 z-50 bg-gray-50 flex flex-row md:gap-10 h-fit px-40 py-5 items-center justify-between md:px-45 w-full border-2 shadow shadow-md">
           <Img
             className="h-[50px] w-[140px]"
             src="images/img_layerx00201.svg"
@@ -46,21 +46,21 @@ const BerandaPage = () => {
           <div className="flex sm:flex-1 sm:flex-col flex-row gap-6 items-center justify-center w-auto sm:w-full">
             <div className="flex flex-col items-center justify-center w-auto">
               <Text
-                className="text-red-600  text-xl w-auto"
+                className="text-red-600 text-md w-auto"
                 size="txtMonaSansRegular18"
               >
                 Beranda
               </Text>
             </div>
             <Button
-              className="common-pointer bg-transparent cursor-pointer leading-[normal] min-w-[116px] text-center text-gray-900 text-lg"
+              className="common-pointer bg-transparent cursor-pointer leading-[normal] min-w-[116px] text-center text-gray-900 hover:text-red-600 text-md"
               onClick={() => navigate("/tentangkami")}
               size="xs"
             >
               Tentang Kami
             </Button>
             <Button
-              className="common-pointer bg-transparent cursor-pointer leading-[normal] min-w-[60px] text-center text-gray-900 text-lg"
+              className="common-pointer bg-transparent cursor-pointer leading-[normal] min-w-[60px] text-center text-gray-900 text-md hover:text-red-600"
               onClick={() => navigate("/kontak")}
               size="xs"
             >
@@ -87,42 +87,33 @@ const BerandaPage = () => {
           </div>
         </header>
         <div className="sm:h-[2035px] h-[2283px] md:h-[2336px] md:px-5 relative w-full">
-          <div className="absolute md:h-[2035px] h-[2161px] inset-x-[0] mx-auto top-[0] w-full">
-            <div className="md:h-[2035px] h-[2161px] m-auto w-full">
-              <Img
-                className="absolute bottom-[0] h-[2035px] inset-x-[0] mx-auto object-cover md:w-full"
-                src="images/img_blob.png"
-                alt="blob"
-              />
-              <div className="absolute bg-gray-50 flex flex-col inset-x-[0] items-center justify-start mx-auto p-[97px] md:px-10 sm:px-5 top-[0] w-full">
-                <div className="flex flex-col items-center justify-start mb-[422px] w-[66%] md:w-full">
+          <div className="absolute bg-white md:h-[2035px] h-[2161px] mx-auto top-[0] w-full">
+              <div className="absolute flex flex-col inset-x-[0] items-center justify-start mx-auto p-[97px] md:px-10 sm:px-5 top-[0] w-full">
                   <div className="flex flex-col gap-6 h-[126px] md:h-auto items-center justify-center max-w-[817px] w-full">
                     <Text
                       className="md:text-5xl text-[64px] text-black-900 tracking-[-1.28px] w-auto"
                       size="txtMonaSansBold64"
                     >
-                      <span className="text-gray-900 font-monasans text-left font-bold">
+                      <span className="text-gray-900 font-monasans text-left font-bold text-3xl">
                         Selamat datang di
                       </span>
                       <span className="text-black-900 font-monasans text-left font-bold">
                         {" "}
                       </span>
-                      <span className="text-red-600 font-monasans text-left font-bold">
+                      <span className="text-red-600 font-monasans text-left font-bold text-3xl">
                         Fastfixx
                       </span>
                     </Text>
                     <Text
-                      className="text-2xl md:text-[22px] text-gray-600 sm:text-xl tracking-[-0.48px] w-auto"
+                      className="text-xl md:text-[22px] text-gray-600 sm:text-xl font-semibold tracking-[-0.48px] w-auto"
                       size="txtMonaSansBold24"
                     >
                       Berkembang Bersama, Raih Kesuksesan Bersama!
                     </Text>
                   </div>
                 </div>
-              </div>
-            </div>
             <Img
-              className="absolute h-[791px] inset-x-[0] mx-auto object-cover rounded-[10px] top-[14%] w-[78%]"
+              className="absolute h-[791px] inset-x-[0] mx-auto object-cover rounded-[10px] top-[14%] w-[78%] rounded-lg shadow-xl border-2 border-black"
               src="images/img_dashboardbengkel.png"
               alt="dashboardbengke"
             />
@@ -133,7 +124,7 @@ const BerandaPage = () => {
                 <div className="flex md:flex-1 flex-col items-center justify-start md:mt-0 mt-[62px] w-[87%] md:w-full">
                   <div className="flex flex-col md:gap-10 gap-[79px] justify-start w-full">
                     <Text
-                      className="md:ml-[0] ml-[190px] text-5xl sm:text-[38px] md:text-[44px] text-center text-gray-900 tracking-[-0.96px]"
+                      className="md:ml-[0] ml-[190px] text-3xl sm:text-[38px] md:text-[44px] text-center text-gray-900 tracking-[-0.96px]"
                       size="txtMonaSansBold48"
                     >
                       Kenapa bergabung dengan kami
@@ -149,13 +140,13 @@ const BerandaPage = () => {
                       <div className="flex sm:flex-1 flex-col md:gap-10 gap-16 items-start justify-start px-5 w-[590px] sm:w-full">
                         <div className="flex flex-col gap-3 items-start justify-start w-[555px] sm:w-full">
                           <Text
-                            className="text-4xl sm:text-[32px] md:text-[34px] text-gray-900 tracking-[-0.72px] w-auto"
+                            className="text-3xl text-gray-900 tracking-[-0.72px] w-auto"
                             size="txtMonaSansBold36"
                           >
                             Banyaknya Permintaan Layanan
                           </Text>
                           <Text
-                            className="text-gray-600 text-justify text-xl tracking-[-0.40px] w-auto"
+                            className="text-gray-600 text-justify text-lg tracking-[-0.40px] w-auto"
                             size="txtMonaSansBold20"
                           >
                             Jaringan kami membawa banyak pelanggan setiap hari.
@@ -163,13 +154,13 @@ const BerandaPage = () => {
                         </div>
                         <div className="flex flex-col gap-3 items-start justify-start w-[570px] sm:w-full">
                           <Text
-                            className="text-4xl sm:text-[32px] md:text-[34px] text-gray-900 tracking-[-0.72px] w-auto"
+                            className="text-3xl sm:text-[32px] md:text-[34px] text-gray-900 tracking-[-0.72px] w-auto"
                             size="txtMonaSansBold36"
                           >
                             Tingkatkan Eksposur Bisnis
                           </Text>
                           <Text
-                            className="max-w-[570px] md:max-w-full text-gray-600 text-justify text-xl tracking-[-0.40px]"
+                            className="max-w-[570px] md:max-w-full text-gray-600 text-justify text-lg tracking-[-0.40px]"
                             size="txtMonaSansBold20"
                           >
                             Dapatkan eksposur yang lebih tinggi dan tingkatkan
@@ -178,13 +169,13 @@ const BerandaPage = () => {
                         </div>
                         <div className="flex flex-col gap-3 items-start justify-start w-[570px] sm:w-full">
                           <Text
-                            className="text-4xl sm:text-[32px] md:text-[34px] text-gray-900 tracking-[-0.72px] w-auto"
+                            className="text-3xl sm:text-[32px] md:text-[34px] text-gray-900 tracking-[-0.72px] w-auto"
                             size="txtMonaSansBold36"
                           >
                             Manajemen yang Mudah
                           </Text>
                           <Text
-                            className="max-w-[570px] md:max-w-full text-gray-600 text-justify text-xl tracking-[-0.40px]"
+                            className="max-w-[570px] md:max-w-full text-gray-600 text-justify text-lg tracking-[-0.40px]"
                             size="txtMonaSansBold20"
                           >
                             Pantau jadwal dan terima permintaan layanan dengan
@@ -197,21 +188,17 @@ const BerandaPage = () => {
                 </div>
                 
   
-
-
-
-
               </div>
               <div className="flex flex-col md:gap-10 gap-16 items-center justify-start md:ml-[0] ml-[168px] w-auto md:w-full">
                 <Text
-                  className="text-5xl sm:text-[38px] md:text-[44px] text-center text-gray-900 tracking-[-0.96px] w-auto"
+                  className="text-3xl sm:text-[38px] md:text-[44px] text-center text-gray-900 tracking-[-0.96px] w-auto"
                   size="txtMonaSansBold48"
                 >
                   Apa yang dikatakan mitra kami
                 </Text>
                 <div className="flex flex-col md:gap-10 gap-16 items-start justify-start max-w-[782px] w-full">
                   <Text
-                    className="text-gray-900 text-justify text-xl"
+                    className="text-gray-900 text-justify text-lg"
                     size="txtMonaSansRegular20"
                   >
                     <>
@@ -223,7 +210,7 @@ const BerandaPage = () => {
                     </>
                   </Text>
                   <Text
-                    className="text-gray-900 text-justify text-xl"
+                    className="text-gray-900 text-justify text-lg"
                     size="txtMonaSansRegular20"
                   >
                     <>
@@ -235,7 +222,7 @@ const BerandaPage = () => {
                     </>
                   </Text>
                   <Text
-                    className="text-gray-900 text-justify text-xl"
+                    className="text-gray-900 text-justify text-lg"
                     size="txtMonaSansRegular20"
                   >
                     <>
@@ -255,14 +242,14 @@ const BerandaPage = () => {
           <div className="md:h-[164px] h-[342px] mr-[75px] relative w-[1056px] md:w-full">
             <div className="absolute bg-gray-900 flex flex-col gap-6 h-full inset-y-[0] items-start justify-center left-[0] max-w-[962px] my-auto w-full">
               <Text
-                className="max-w-[876px] md:max-w-full text-2xl md:text-[22px] text-gray-200 sm:text-xl tracking-[-0.48px]"
+                className="max-w-[876px] md:max-w-full text-lg text-gray-200 sm:text-xl tracking-[-0.48px]"
                 size="txtMonaSansBold24Gray200"
               >
                 Mulai petualangan Anda bersama kami! Bergabung sekarang untuk
                 menjangkau lebih banyak pelanggan dan mengembangkan bisnis Anda.
               </Text>
               <Button
-                className="cursor-pointer font-bold leading-[normal] min-w-[337px] sm:text-2xl md:text-[26px] text-[28px] text-center tracking-[-0.56px]"
+                className="cursor-pointer px-4 py-3 font-bold leading-[normal] sm:text-xl text-center tracking-[-0.56px] hover:bg-red-500"
                 shape="round"
                 color="red_600"
                 size="xl"
@@ -273,7 +260,7 @@ const BerandaPage = () => {
               </Button>
             </div>
             <Text
-              className="absolute inset-x-[0] max-w-[1056px] md:max-w-full mx-auto md:text-5xl text-[50px] text-gray-50 top-[0] tracking-[-1.28px]"
+              className="absolute inset-x-[0] max-w-[1056px] md:max-w-full mx-auto text-3xl text-gray-50 top-[0] tracking-[-1.28px]"
               size="txtMonaSansBold64Gray50"
             >
               Bergabunglah dengan FastFixx Hari Ini!

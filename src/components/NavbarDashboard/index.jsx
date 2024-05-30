@@ -3,8 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom"; 
 const NavbarDashboard = () => {
     return (
-      <nav className="sticky top-0 bg-gray-200 p-4">
-      <div className="container mx-auto flex justify-between items-center">
+      <nav className="fixed top-0 bg-gray-50 p-4 shadow-md">
         {/* Left side - Page name */}
         <div className="text-white text-lg font-bold">Dashboard</div>
     
@@ -26,7 +25,6 @@ const NavbarDashboard = () => {
       />
     </Link>
         </div>
-      </div>
     </nav>
     );
   };
